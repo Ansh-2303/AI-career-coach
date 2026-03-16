@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  clerkId   String   @unique
+  email     String?
+  createdAt DateTime @default(now())
+
+  resumes        ResumeData[]
+  interviews     InterviewSession[]
+  careerRoadmaps CareerRoadmap[]
+}
+
+model ResumeData {
+  id        String   @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now())
+
+  originalBullet  String
+  enhancedBullets Json
+  coverLetter     String?
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model InterviewSession {
+  id        String   @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now())
+
+  role        String
+  questions   Json
+  answers     Json
+  score       Int
+  feedback    String?
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model CareerRoadmap {
+  id        String   @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now())
+
+  targetRole String
+  roadmap    Json
+
+  user User @relation(fields: [userId], references: [id])
+}
