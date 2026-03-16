@@ -15,6 +15,9 @@ import {
 } from "lucide-react"
 
 import { getAverageInterviewScore } from "@/actions/metrics"
+import { getCareerStrategyScore } from "@/actions/metrics"
+
+import { getResumeStrength } from "@/actions/metrics"
 
 const container = {
   hidden: {},
@@ -34,12 +37,19 @@ export default function OverviewDashboard() {
 
   const { user } = useUser()   // 🔹 this was missing
 
-  const [avgScore, setAvgScore] = useState(0)
+const [avgScore, setAvgScore] = useState<number | null>(null)
+const [resumeStrength, setResumeStrength] = useState<number | null>(null)
+const [careerScore, setCareerScore] = useState<number | null>(null)
+  const [applicationCount, setApplicationCount] = useState(0)
 
   useEffect(() => {
     async function loadScore() {
       const score = await getAverageInterviewScore()
       setAvgScore(score)
+      const strength = await getResumeStrength()
+setResumeStrength(strength)
+const strategy = await getCareerStrategyScore()
+setCareerScore(strategy)
     }
 
     loadScore()
@@ -48,25 +58,25 @@ export default function OverviewDashboard() {
   const stats = [
     {
       label: "Resume Strength",
-      value: "85%",
+     value: resumeStrength !== null ? `${resumeStrength}%` : "...",
       icon: FileText,
       color: "text-indigo-600"
     },
     {
       label: "Interview Readiness",
-      value: `${avgScore}%`,
+      value: avgScore !== null ? `${avgScore}%` : "...",
       icon: Mic,
       color: "text-purple-600"
     },
     {
       label: "Open Applications",
-      value: "4",
+      value: `${applicationCount}`,
       icon: Rocket,
       color: "text-emerald-600"
     },
     {
       label: "Career Strategy",
-      value: "78%",
+      value: careerScore !== null ? `${careerScore}%` : "...",
       icon: Compass,
       color: "text-orange-600"
     }

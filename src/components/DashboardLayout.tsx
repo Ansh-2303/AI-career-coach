@@ -135,6 +135,16 @@ export default function DashboardLayout({
 
         </main>
 
+      <footer className="text-center text-sm text-zinc-400 py-4 border-t">
+  Developed by 
+  <a 
+    href="https://github.com/Ansh-2303"
+    target="_blank"
+    className="font-semibold text-indigo-600 ml-1 hover:underline"
+  >
+    Ansh Patel
+  </a>
+</footer>
       </div>
 
     </div>
