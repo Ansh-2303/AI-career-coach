@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { useUser } from "@clerk/nextjs"
 import {
   Sparkles,
   FileText,
@@ -86,7 +87,7 @@ export default function OverviewDashboard() {
 
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <Sparkles size={20}/>
-              Good morning, Ansh!
+             Good morning, {user?.firstName || "User"}!
             </h1>
 
             <p className="text-indigo-100 mt-2">

@@ -1,5 +1,6 @@
 "use client"
 
+import { useUser, UserButton } from "@clerk/nextjs"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -8,7 +9,6 @@ import {
   Video,
   Compass
 } from "lucide-react"
-import { UserButton } from "@clerk/nextjs"
 
 type Tab = "overview" | "resume" | "interview" | "career"
 
@@ -26,6 +26,7 @@ export default function DashboardLayout({
   career
 }: DashboardLayoutProps) {
 
+  const { user } = useUser()   // get logged-in user
   const [activeTab, setActiveTab] = useState<Tab>("overview")
 
   const tabs = [
@@ -55,13 +56,9 @@ export default function DashboardLayout({
 
       <aside className="w-64 bg-zinc-950 text-white flex flex-col">
 
-        {/* Logo */}
-
         <div className="h-16 flex items-center px-6 text-xl font-bold border-b border-zinc-800">
           Coach.ai
         </div>
-
-        {/* Menu */}
 
         <nav className="flex flex-col gap-2 p-4">
 
@@ -75,15 +72,10 @@ export default function DashboardLayout({
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as Tab)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition
-                ${
-                  active
-                    ? "bg-indigo-600"
-                    : "hover:bg-zinc-800"
-                }`}
+                ${active ? "bg-indigo-600" : "hover:bg-zinc-800"}`}
               >
 
                 <Icon size={20} />
-
                 {tab.label}
 
               </button>
@@ -107,7 +99,15 @@ export default function DashboardLayout({
             {activeTab.replace("-", " ")}
           </h1>
 
-<UserButton />
+          <div className="flex items-center gap-3">
+
+            <span className="text-sm text-zinc-600">
+              {user?.firstName || "User"}
+            </span>
+
+            <UserButton />
+
+          </div>
 
         </header>
 
@@ -140,4 +140,3 @@ export default function DashboardLayout({
     </div>
   )
 }
-
