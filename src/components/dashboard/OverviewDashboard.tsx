@@ -32,6 +32,8 @@ const item = {
 
 export default function OverviewDashboard() {
 
+  const { user } = useUser()   // 🔹 this was missing
+
   const [avgScore, setAvgScore] = useState(0)
 
   useEffect(() => {
@@ -76,8 +78,8 @@ export default function OverviewDashboard() {
       {/* Welcome Header */}
 
       <motion.div
-        initial={{opacity:0, y:10}}
-        animate={{opacity:1, y:0}}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
         className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 text-white rounded-2xl p-8 shadow-xl"
       >
 
@@ -86,8 +88,8 @@ export default function OverviewDashboard() {
           <div>
 
             <h1 className="text-2xl font-bold flex items-center gap-2">
-              <Sparkles size={20}/>
-             Good morning, {user?.firstName || "User"}!
+              <Sparkles size={20} />
+              Good morning, {user?.firstName || "User"}!
             </h1>
 
             <p className="text-indigo-100 mt-2">
@@ -153,13 +155,13 @@ export default function OverviewDashboard() {
         {/* Recommended Next Steps */}
 
         <motion.div
-          initial={{opacity:0, x:-20}}
-          animate={{opacity:1, x:0}}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           className="lg:col-span-2 bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm"
         >
 
           <h2 className="font-semibold text-lg mb-5 flex items-center gap-2">
-            <Brain size={18}/>
+            <Brain size={18} />
             Recommended Next Steps
           </h2>
 
@@ -198,13 +200,13 @@ export default function OverviewDashboard() {
         {/* Quick Tools */}
 
         <motion.div
-          initial={{opacity:0, x:20}}
-          animate={{opacity:1, x:0}}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
           className="bg-zinc-900 text-white rounded-2xl p-6 shadow-xl"
         >
 
           <h2 className="font-semibold text-lg mb-5 flex items-center gap-2">
-            <Rocket size={18}/>
+            <Rocket size={18} />
             Quick Tools
           </h2>
 
@@ -212,29 +214,29 @@ export default function OverviewDashboard() {
 
             <button className="w-full bg-indigo-600 hover:bg-indigo-700 transition text-white rounded-xl p-3 flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <FileText size={16}/>
+                <FileText size={16} />
                 Bullet Enhancer
               </span>
 
-              <ArrowRight size={16}/>
+              <ArrowRight size={16} />
             </button>
 
             <button className="w-full bg-purple-600 hover:bg-purple-700 transition text-white rounded-xl p-3 flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <Mic size={16}/>
+                <Mic size={16} />
                 Mock Interview
               </span>
 
-              <ArrowRight size={16}/>
+              <ArrowRight size={16} />
             </button>
 
             <button className="w-full bg-emerald-600 hover:bg-emerald-700 transition text-white rounded-xl p-3 flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <Compass size={16}/>
+                <Compass size={16} />
                 Career Roadmap
               </span>
 
-              <ArrowRight size={16}/>
+              <ArrowRight size={16} />
             </button>
 
           </div>
